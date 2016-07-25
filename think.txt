@@ -1,0 +1,16 @@
+1.数据结构
+   hash结构
+       省--> id  省份名称    排序
+       市--> id  城市名称    是否直辖市    排序
+       县--> id  县城名称    排序
+
+   集合
+       省份id  城市id集合
+
+       provice:id [cityId...]
+       city:id    [countyId...]
+
+   有序集合
+       provinceOrder 排序   省份id
+       cityOrder     排序   城市id
+       countyOrder   排序   区县id
