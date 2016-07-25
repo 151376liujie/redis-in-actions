@@ -52,12 +52,12 @@ public class ProvinceCao {
             Map<String, String> map = JedisUtils.hgetAll(provinceId);
             Province province = new Province();
             try {
-                BeanUtils.populate(province,map);
+                BeanUtils.populate(province, map);
                 int pId = Integer.valueOf(provinceId.split(":")[1]);
                 province.setId(pId);
                 list.add(province);
             } catch (Exception e) {
-                LOGGER.error(e.getMessage(),e);
+                LOGGER.error(e.getMessage(), e);
             }
         }
         return list;
@@ -71,19 +71,19 @@ public class ProvinceCao {
     public List<City> loadAllCities() {
         List<City> cities = new ArrayList<City>();
         Set<String> keys = JedisUtils.keys(H_CITY_PREFIX + "*");
-        if (keys == null || keys.isEmpty()){
-            return  cities;
+        if (keys == null || keys.isEmpty()) {
+            return cities;
         }
 
-        for (String key : keys){
+        for (String key : keys) {
             Map<String, String> map = JedisUtils.hgetAll(key);
             City city = new City();
             try {
-                BeanUtils.populate(city,map);
+                BeanUtils.populate(city, map);
                 city.setId(Integer.valueOf(key.split(":")[1]));
                 cities.add(city);
             } catch (Exception e) {
-                LOGGER.error(e.getMessage(),e);
+                LOGGER.error(e.getMessage(), e);
             }
         }
         return cities;
@@ -97,19 +97,19 @@ public class ProvinceCao {
      */
     public List<City> loadCitiesByProvinceId(int provinceId) {
         Set<String> cityIds = JedisUtils.zrange(getHashKey(Z_KEY_CITIES_OF_PROVINCE, provinceId), 0, -1);
-        if (cityIds == null || cityIds.isEmpty()){
+        if (cityIds == null || cityIds.isEmpty()) {
             return Collections.emptyList();
         }
-        List<City> cities = new ArrayList<City>(cityIds.size());
-        for (String cityId:cityIds){
+        List<City> cities = new ArrayList<>(cityIds.size());
+        for (String cityId : cityIds) {
             Map<String, String> map = JedisUtils.hgetAll(getHashKey(H_CITY_PREFIX, Integer.valueOf(cityId)));
             City city = new City();
             try {
-                BeanUtils.populate(city,map);
+                BeanUtils.populate(city, map);
                 city.setId(Integer.valueOf(cityId));
                 cities.add(city);
             } catch (Exception e) {
-                LOGGER.error(e.getMessage(),e);
+                LOGGER.error(e.getMessage(), e);
             }
         }
         return cities;
@@ -123,19 +123,19 @@ public class ProvinceCao {
      */
     public List<County> loadCountiesByCityId(int cityId) {
         Set<String> countyIds = JedisUtils.zrange(getHashKey(Z_KEY_COUNTIES_OF_CITY, cityId), 0, -1);
-        if (countyIds == null || countyIds.isEmpty()){
+        if (countyIds == null || countyIds.isEmpty()) {
             return Collections.emptyList();
         }
-        List<County> counties = new ArrayList<County>(countyIds.size());
-        for (String countyId:countyIds){
+        List<County> counties = new ArrayList<>(countyIds.size());
+        for (String countyId : countyIds) {
             Map<String, String> map = JedisUtils.hgetAll(getHashKey(H_COUNTY_PREFIX, Integer.valueOf(countyId)));
             County county = new County();
             try {
-                BeanUtils.populate(county,map);
+                BeanUtils.populate(county, map);
                 county.setId(Integer.valueOf(countyId));
                 counties.add(county);
             } catch (Exception e) {
-                LOGGER.error(e.getMessage(),e);
+                LOGGER.error(e.getMessage(), e);
             }
         }
         return counties;
