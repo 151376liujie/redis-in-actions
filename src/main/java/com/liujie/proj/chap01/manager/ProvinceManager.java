@@ -32,7 +32,7 @@ public class ProvinceManager {
         province.setName("河南省");
         province.setRank(1);
 
-        List<City> cities = new ArrayList<City>();
+        List<City> cities = new ArrayList<>();
         City city_xinyang = new City();
         city_xinyang.setId(10001);
         city_xinyang.setName("信阳市");
@@ -46,7 +46,7 @@ public class ProvinceManager {
         cities.add(city_zhengzhou);
 
 
-        List<County> counties = new ArrayList<County>();
+        List<County> counties = new ArrayList<>();
         County county = new County();
         county.setId(100);
         county.setName("平桥区");
@@ -67,7 +67,7 @@ public class ProvinceManager {
 
         city_xinyang.setCounties(counties);
 
-        List<County> counties2 = new ArrayList<County>();
+        List<County> counties2 = new ArrayList<>();
         County county4 = new County();
         county4.setId(200);
         county4.setName("二七区");
